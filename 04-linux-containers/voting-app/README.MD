@@ -73,6 +73,13 @@ sudo -u postgres psql
 ALTER USER postgres WITH PASSWORD 'postgres';
 ```
 
+```
+\l - список баз
+\du - список пользователей
+\c postgres - подключиться к базе 'postgres'
+\dt * - список таблиц
+```
+
 Разрешаем вход по паролю
 
 ```bash
