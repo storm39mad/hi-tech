@@ -1,3 +1,19 @@
+## Отключить SELinux
+
+```bash
+setenforce 0
+vim /etc/selinux/config
+```
+```
+SELINUX=permissive
+```
+
+## Отключить firewalld
+
+```
+systemctl stop firewalld.service
+systemctl disable firewalld.service
+```
 
 ## Приложение
 

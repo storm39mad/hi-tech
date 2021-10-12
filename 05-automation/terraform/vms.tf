@@ -33,6 +33,11 @@ data "vsphere_datastore" "datastore" {
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
+data "vsphere_datastore" "datastore2" {
+  name          = "esxi2data1"
+  datacenter_id = data.vsphere_datacenter.dc.id
+}
+
 data "vsphere_resource_pool" "pool" {
   name          = "ClusterHT/Resources"
   datacenter_id = data.vsphere_datacenter.dc.id
@@ -49,8 +54,8 @@ resource "vsphere_virtual_machine" "vm1" {
   datastore_id     = data.vsphere_datastore.datastore.id
 
   firmware = "efi"
-  num_cpus = 2
-  memory   = 4096
+  num_cpus = 4
+  memory   = 8192
   guest_id = "${data.vsphere_virtual_machine.template.guest_id}"
   scsi_type = "${data.vsphere_virtual_machine.template.scsi_type}"
 
@@ -63,6 +68,13 @@ resource "vsphere_virtual_machine" "vm1" {
     size             = "${data.vsphere_virtual_machine.template.disks.0.size}"
     eagerly_scrub    = "${data.vsphere_virtual_machine.template.disks.0.eagerly_scrub}"
     thin_provisioned = "${data.vsphere_virtual_machine.template.disks.0.thin_provisioned}"
+  }
+
+  disk {
+    label       = "disk1"
+    size        = "20"
+    thin_provisioned = true
+    unit_number = 1
   }
 
   clone {
@@ -88,8 +100,8 @@ resource "vsphere_virtual_machine" "vm2" {
   datastore_id     = data.vsphere_datastore.datastore.id
 
   firmware = "efi"
-  num_cpus = 2
-  memory   = 1024
+  num_cpus = 4
+  memory   = 8192
   guest_id = "${data.vsphere_virtual_machine.template.guest_id}"
   scsi_type = "${data.vsphere_virtual_machine.template.scsi_type}"
 
@@ -104,6 +116,12 @@ resource "vsphere_virtual_machine" "vm2" {
     thin_provisioned = "${data.vsphere_virtual_machine.template.disks.0.thin_provisioned}"
   }
 
+  disk {
+    label       = "disk1"
+    size        = "20"
+    thin_provisioned = true
+    unit_number = 1
+  }
   clone {
     template_uuid = "${data.vsphere_virtual_machine.template.id}"
     customize {
@@ -124,11 +142,11 @@ resource "vsphere_virtual_machine" "vm2" {
 resource "vsphere_virtual_machine" "vm3" {
   name             = "k8s3"
   resource_pool_id = data.vsphere_resource_pool.pool.id
-  datastore_id     = data.vsphere_datastore.datastore.id
+  datastore_id     = data.vsphere_datastore.datastore2.id
 
   firmware = "efi"
-  num_cpus = 2
-  memory   = 1024
+  num_cpus = 4
+  memory   = 8192
   guest_id = "${data.vsphere_virtual_machine.template.guest_id}"
   scsi_type = "${data.vsphere_virtual_machine.template.scsi_type}"
 
@@ -143,6 +161,12 @@ resource "vsphere_virtual_machine" "vm3" {
     thin_provisioned = "${data.vsphere_virtual_machine.template.disks.0.thin_provisioned}"
   }
 
+  disk {
+    label       = "disk1"
+    size        = "20"
+    thin_provisioned = true
+    unit_number = 1
+  }
   clone {
     template_uuid = "${data.vsphere_virtual_machine.template.id}"
     customize {
