@@ -1,5 +1,22 @@
 # Docker commands
 
+## Отключить SELinux
+
+```bash
+setenforce 0
+vim /etc/selinux/config
+```
+```
+SELINUX=permissive
+```
+
+## Отключить firewalld
+
+```
+systemctl stop firewalld.service
+systemctl disable firewalld.service
+```
+
 ## Установка docker в CentOS 8
 
 [Docker installation](https://docs.docker.com/engine/install/centos/)
