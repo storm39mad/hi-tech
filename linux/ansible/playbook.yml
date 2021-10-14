@@ -1,7 +1,14 @@
 - name: Test
   hosts: centos
   tasks:
-    - name: Install vim
+    - name: Enable EPEL
       dnf:
-        name: vim
+        name: epel-release
+        state: present
+    - name: Install common packages
+      dnf:
+        name:
+          - vim
+          - htop
+          - mc
         state: present
