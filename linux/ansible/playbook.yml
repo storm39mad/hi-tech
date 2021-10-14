@@ -1,0 +1,18 @@
+- name: Our vote app
+  hosts: voteapp
+  tasks:
+    - name: Create docker bridge
+      docker_network:
+        name: backend
+    
+    - name: Start Redis
+      docker_container:
+        name: redis
+        image: redis
+        restart_policy: always
+        state: started
+        networks:
+          - name: backend
+        purge_networks: yes
+        volumes:
+          - /opt/redis:/data
