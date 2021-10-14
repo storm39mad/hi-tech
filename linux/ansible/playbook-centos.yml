@@ -37,6 +37,12 @@
           - docker-ce-cli
           - containerd.io
         state: present
+    
+    - name: Enable and start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
 
 
 

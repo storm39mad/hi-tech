@@ -1,0 +1,12 @@
+- name: Our Voting app
+  hosts: debian
+  tasks:
+    - name: Install packages for Docker installation
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gnupg
+          - lsb-release
+        state: present
