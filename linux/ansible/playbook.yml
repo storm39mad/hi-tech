@@ -1,0 +1,7 @@
+- name: Test
+  hosts: centos
+  tasks:
+    - name: Install vim
+      dnf:
+        name: vim
+        state: present
