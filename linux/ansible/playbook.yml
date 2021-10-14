@@ -1,4 +1,4 @@
-- name: Test
+- name: Our Voting app
   hosts: centos
   tasks:
     - name: Enable EPEL
@@ -12,3 +12,11 @@
           - htop
           - mc
         state: present
+    - name: Get docker repo
+      get_url:
+        url: https://download.docker.com/linux/centos/docker-ce.repo
+        dest: /etc/yum.repos.d/docker-ce.repo
+
+
+
+
