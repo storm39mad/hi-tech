@@ -16,3 +16,18 @@
         purge_networks: yes
         volumes:
           - /opt/redis:/data
+    
+    - name: Start Postgres
+      docker_container:
+        name: db
+        image: postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTFRES_PASSWORD: postgres
+        restart_policy: always
+        state: started
+        networks:
+          - name: backend
+        purge_networks: yes
+        volumes:
+          - /opt/pgdata:/var/lib/postgresql/data
