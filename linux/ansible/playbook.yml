@@ -23,7 +23,7 @@
         image: postgres
         env:
           POSTGRES_USER: postgres
-          POSTFRES_PASSWORD: postgres
+          POSTGRES_PASSWORD: postgres
         restart_policy: always
         state: started
         networks:

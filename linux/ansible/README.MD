@@ -16,3 +16,7 @@ ssh-copy-id root@172.30.1.32
 ```bash
 ansible-playbook --user root -i host.ini playbook.yml 
 ```
+
+```bash
+ansible-galaxy init docker
+```
