@@ -1,4 +1,4 @@
-- name: Our Voting app
+- name: Docker installation
   hosts: centos
   tasks:
     - name: Disable Firewalld
@@ -43,6 +43,18 @@
         name: docker
         state: started
         enabled: yes
+    
+    - name: Install python3 (and pip)
+      dnf:
+        name:
+          - python3
+          - python3-pip
+        state: present
+    
+    - name: Install docker-py
+      pip:
+        name: docker-py
+        state: present
 
 
 
