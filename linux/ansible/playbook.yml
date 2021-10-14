@@ -5,6 +5,7 @@
       dnf:
         name: epel-release
         state: present
+    
     - name: Install common packages
       dnf:
         name:
@@ -12,10 +13,19 @@
           - htop
           - mc
         state: present
+    
     - name: Get docker repo
       get_url:
         url: https://download.docker.com/linux/centos/docker-ce.repo
         dest: /etc/yum.repos.d/docker-ce.repo
+    
+    - name: Docker installation
+      dnf:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: present
 
 
 
