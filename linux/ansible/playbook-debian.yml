@@ -28,6 +28,12 @@
           - python3-pip
         state: present
     
+    - name: Chnage default python version
+      file:
+        src: /bin/python3
+        dest: /bin/python
+        state: link
+    
     - name: Install docker-py
       pip:
         name: docker-py
