@@ -31,3 +31,15 @@
         purge_networks: yes
         volumes:
           - /opt/pgdata:/var/lib/postgresql/data
+    
+    - name: Start Vote service
+      docker_container:
+        name: vote
+        image: "5d20240/ht-vote"
+        restart_policy: always
+        state: started
+        networks:
+          - name: backend
+        purge_networks: yes
+        ports:
+          - 3000:80
