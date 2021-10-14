@@ -1,0 +1,49 @@
+version: '3.4'
+
+services:
+  vote:
+    image: vote
+    build: ./vote
+    depends_on:
+      - redis
+    ports:
+      - '3000:80'
+    networks:
+      - backend
+  redis:
+    image: redis
+    volumes:
+      - redis:/data
+    networks:
+      - backend
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - backend
+  worker:
+    image: worker
+    build: ./worker
+    depends_on:
+      - redis
+      - db
+    networks:
+      - backend
+  result:
+    image: result
+    build: ./result
+    ports:
+      - '4000:80'
+    networks:
+      - backend
+
+volumes:
+  redis:
+  pgdata:
+
+networks:
+  backend:

@@ -1,0 +1,91 @@
+- name: Test ansible
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Install vim (test) 
+      dnf:
+        name: vim
+        state: present
+    - name: Get docker repos 
+      get_url:
+        url: https://download.docker.com/linux/centos/docker-ce.repo
+        dest: /etc/yum.repos.d/docker-ce.repo
+    - name: Install docker 
+      dnf:
+        name:
+            - docker-ce
+            - docker-ce-cli
+            - containerd.io
+        state: present
+    - name: Enable docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+    - name: Install modules for PIP
+      dnf:
+        name: python3-pip
+        state: present
+    - name: Install docker python
+      pip:
+        name: docker-py
+        state: present
+    - name: Create docker network
+      docker_network:
+        name: backend
+    - name: Start Redis
+      docker_container:
+        name: redis
+        image: redis:latest
+        restart_policy: always
+        state: started
+        networks:
+            - name: backend
+        purge_networks: yes
+        volumes:
+            - /opt/redis/data:/data
+    - name: Start Postgres
+      docker_container:
+        name: db
+        image: postgres
+        restart_policy: always
+        state: started
+        env:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+        networks:
+            - name: backend
+        purge_networks: yes
+        volumes:
+            - /opt/pgdata:/var/lib/postgresql/data
+    - name: Run Vote app
+      docker_container:
+        name: vote
+        image: 5d20240/ht-vote
+        restart_policy: always
+        state: started
+        networks:
+            - name: backend
+        purge_networks: yes
+        ports:
+            - 3000:80
+    - name: Run Worker app
+      docker_container:
+        name: worker
+        image: 5d20240/ht-worker
+        restart_policy: always
+        state: started
+        networks:
+            - name: backend
+        purge_networks: yes
+    - name: Run Results app
+      docker_container:
+        name: result
+        image: 5d20240/ht-result
+        restart_policy: always
+        state: started
+        networks:
+            - name: backend
+        purge_networks: yes
+        ports:
+            - 4000:80

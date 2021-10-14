@@ -1,0 +1,13 @@
+[Unit]
+Description=Vote app
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/root/example-voting-app/vote/.venv/bin/gunicorn app:app -b 0.0.0.0:3000 --log-file - --access-logfile - --workers 4 --keep-alive 0
+WorkingDirectory=/root/example-voting-app/vote
+Restart=on-failure
+RestartSec=42s
+
+[Install]
+WantedBy=multi-user.target
