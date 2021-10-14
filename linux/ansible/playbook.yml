@@ -1,6 +1,17 @@
 - name: Our Voting app
   hosts: centos
   tasks:
+    - name: Disable Firewalld
+      service:
+        name: firewalld
+        state: stopped
+        enabled: no
+    
+    - name: Disable SELinux
+      selinux:
+        state: permissive
+        policy: targeted
+    
     - name: Enable EPEL
       dnf:
         name: epel-release
