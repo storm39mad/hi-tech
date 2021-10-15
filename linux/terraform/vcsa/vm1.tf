@@ -32,9 +32,9 @@ resource "vsphere_virtual_machine" "k8s1" {
         network_interface {
           ipv4_address = "172.30.1.21"
           ipv4_netmask = 24
-          dns_server_list = [ "172.30.0.1" ]
         }
         ipv4_gateway = "172.30.1.254"
+        dns_server_list = [ "172.30.0.1" ]
       }
     }
 }
