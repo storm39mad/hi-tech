@@ -12,3 +12,14 @@ sudo apt-get install terraform
 
 terraform -install-autocomplete
 ```
+
+```
+terraform init
+terraform validate
+terraform plan
+terraform apply
+terraform show
+```
+
+https://registry.terraform.io/providers/hashicorp/vsphere/latest/docs
+
