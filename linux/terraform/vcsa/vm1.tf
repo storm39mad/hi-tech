@@ -6,6 +6,7 @@ resource "vsphere_virtual_machine" "k8s1" {
 
     num_cpus = 4
     memory   = 4096
+    firmware = "efi"
     guest_id = data.vsphere_virtual_machine.template.guest_id
     scsi_type = data.vsphere_virtual_machine.template.scsi_type
 

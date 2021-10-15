@@ -4,6 +4,7 @@ resource "vsphere_virtual_machine" "k8s3" {
     resource_pool_id = data.vsphere_resource_pool.pool.id
     datastore_id     = data.vsphere_datastore.ds1.id
 
+    firmware = "efi"
     num_cpus = 4
     memory   = 4096
     guest_id = data.vsphere_virtual_machine.template.guest_id
