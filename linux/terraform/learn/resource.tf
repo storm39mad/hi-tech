@@ -16,3 +16,15 @@ resource "local_file" "myfile" {
   filename = var.path
   content = random_string.mystring.id
 }
+
+data "local_file" "hostname" {
+    filename = "/etc/hostname"
+}
+
+output "hostname" {
+  value = data.local_file.hostname.content
+}
+
+output "mystring" {
+    value = random_string.mystring.id
+}
