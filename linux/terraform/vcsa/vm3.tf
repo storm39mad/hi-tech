@@ -2,7 +2,7 @@
 resource "vsphere_virtual_machine" "k8s3" {
     name             = "k8s3"
     resource_pool_id = data.vsphere_resource_pool.pool.id
-    datastore_id     = data.vsphere_datastore.ds1.id
+    datastore_id     = data.vsphere_datastore.ds2.id
 
     firmware = "efi"
     num_cpus = 4
