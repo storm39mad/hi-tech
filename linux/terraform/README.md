@@ -13,6 +13,11 @@ sudo apt-get install terraform
 terraform -install-autocomplete
 ```
 
+### Variables
+```bash
+export TF_VAR_vsphere_password='Pa$$w0rd'
+```
+
 ```
 terraform init
 terraform validate
@@ -20,6 +25,6 @@ terraform plan
 terraform apply
 terraform show
 ```
+[ VMware vSphere Provider ](https://registry.terraform.io/providers/hashicorp/vsphere/latest/docs)
 
-https://registry.terraform.io/providers/hashicorp/vsphere/latest/docs
 
