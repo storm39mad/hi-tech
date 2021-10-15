@@ -28,3 +28,5 @@ terraform show
 [ VMware vSphere Provider ](https://registry.terraform.io/providers/hashicorp/vsphere/latest/docs)
 
 
+Clone and Customize [VMware Provider](https://registry.terraform.io/providers/hashicorp/vsphere/latest/docs/resources/virtual_machine#cloning-and-customization-example)
+
