@@ -16,3 +16,24 @@ kubectl delete -f ./pod.yaml
 ```
 
 [Использование affinity-правил Kubernetes для контроля назначения подов](https://habr.com/ru/company/otus/blog/576944/)
+
+### NFS Server
+
+Disable SELinux
+
+```bash
+[root@nfs ~]# setenforce 0
+[root@nfs ~]# vim /etc/selinux/config 
+```
+```
+SELINUX=permissive
+```
+
+Disable Firewalld
+
+```bash
+[root@nfs ~]# systemctl disable --now firewalld.service 
+Removed /etc/systemd/system/multi-user.target.wants/firewalld.service.
+Removed /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
+```
+
