@@ -14,3 +14,5 @@ kubectl describe pod mynginx
 kubectl logs mynginx
 kubectl delete -f ./pod.yaml
 ```
+
+[Использование affinity-правил Kubernetes для контроля назначения подов](https://habr.com/ru/company/otus/blog/576944/)
