@@ -10,7 +10,7 @@ spec:
     image: nginx:1.21.3
     resources:
       limits:
-        memory: "128Mi"
-        cpu: "500m"
+        memory: "512Mi"
+        cpu: 1
     ports:
       - containerPort: 80
