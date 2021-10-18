@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+spec:
+  selector:
+    matchLabels:
+      app: db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: db
+        image: postgres
+        envFrom:
+          - secretRef:
+              name: pgsqlcreds
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "1"
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+          - name:  pgsql
+            mountPath:  /var/lib/postgresql/data
+      volumes:
+        - name: pgsql
+          persistentVolumeClaim:
+            claimName: pvc-db
