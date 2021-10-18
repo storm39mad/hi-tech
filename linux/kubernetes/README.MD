@@ -37,3 +37,28 @@ Removed /etc/systemd/system/multi-user.target.wants/firewalld.service.
 Removed /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
 ```
 
+Install NFS
+
+```bash
+yum install -y nfs-utils
+systemctl enable --now nfs-server
+mkdir -p /srv/nfs/k8s
+```
+
+NFS Configuration
+
+```bash
+vim /etc/exports
+```
+```
+/srv/nfs/k8s *(rw,sync,no_subtree_check,no_root_squash,no_all_squash,insecure)
+```
+```bash
+exportfs -rav
+```
+
+Install nfs utils on our k8s nodes
+
+```bash
+sudo clush -g all yum install -y nfs-utils
+```
