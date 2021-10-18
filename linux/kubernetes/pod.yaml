@@ -14,3 +14,11 @@ spec:
         cpu: "1"
     ports:
       - containerPort: 80
+    volumeMounts:
+      - name:  testvol
+        mountPath:  /srv/dir
+  volumes:
+    - name: testvol
+      hostPath:
+        path: /opt/dir
+        type: Directory
