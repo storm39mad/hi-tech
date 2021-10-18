@@ -40,25 +40,29 @@ Removed /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
 Install NFS
 
 ```bash
-yum install -y nfs-utils
-systemctl enable --now nfs-server
-mkdir -p /srv/nfs/k8s
+[root@nfs ~]# yum install -y nfs-utils
+[root@nfs ~]# systemctl enable --now nfs-server
+[root@nfs ~]# mkdir -p /srv/nfs/k8s
 ```
 
 NFS Configuration
 
 ```bash
-vim /etc/exports
+[root@nfs ~]# vim /etc/exports
 ```
 ```
 /srv/nfs/k8s *(rw,sync,no_subtree_check,no_root_squash,no_all_squash,insecure)
 ```
 ```bash
-exportfs -rav
+[root@nfs ~]# exportfs -rav
+```
+```bash
+[root@nfs ~]# mkdir /srv/nfs/k8s/redis
+[root@nfs ~]# mkdir /srv/nfs/k8s/pgsql
 ```
 
 Install nfs utils on our k8s nodes
 
 ```bash
-sudo clush -g all yum install -y nfs-utils
+[root@nfs ~]# sudo clush -g all yum install -y nfs-utils
 ```
