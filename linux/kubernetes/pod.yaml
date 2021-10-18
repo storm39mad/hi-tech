@@ -17,8 +17,17 @@ spec:
     volumeMounts:
       - name:  testvol
         mountPath:  /srv/dir
+      - name: nginxconf
+        mountPath: /etc/nginx/nginx.conf
+        subPath: nginx.conf
   volumes:
     - name: testvol
       hostPath:
         path: /opt/dir
         type: Directory
+    - name: nginxconf
+      configMap:
+        name: nginx-conf
+        items:
+          - key: nginx.conf
+            path: nginx.conf
