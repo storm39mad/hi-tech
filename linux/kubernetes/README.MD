@@ -8,4 +8,9 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 
 ```bash
 kubectl apply -f ./pod.yaml
+kubectl get pods
+kubectl get pods -o wide
+kubectl describe pod mynginx
+kubectl logs mynginx
+kubectl delete -f ./pod.yaml
 ```
