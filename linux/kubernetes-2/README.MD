@@ -97,3 +97,20 @@ helm repo update
 helm install ingress-nginx ingress-nginx/ingress-nginx
 ```
 
+## Prometheus
+
+```bash
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm repo update
+helm install prometheus bitnami/kube-prometheus
+```
+```
+prometheus-kube-prometheus-prometheus.default.svc.cluster.local
+```
+
+```bash
+echo "User: admin"
+echo "Password: $(kubectl get secret grafana-admin --namespace default -o jsonpath="{.data.GF_SECURITY_ADMIN_PASSWORD}" | base64 --decode)"
+```
+
+Password: Ihd5H4PwT4
