@@ -114,3 +114,28 @@ echo "Password: $(kubectl get secret grafana-admin --namespace default -o jsonpa
 ```
 
 Password: Ihd5H4PwT4
+
+
+```
+http://prometheus-kube-prometheus-prometheus.default.svc.cluster.local:9090
+```
+
+### Certbot
+
+https://certbot.eff.org/lets-encrypt/debianstretch-nginx
+
+
+```bash
+sudo apt update
+sudo apt install snapd
+
+snap install core
+snap refresh core
+
+snap install --classic certbot
+ln -s /snap/bin/certbot /usr/bin/certbot
+
+certbot --nginx
+
+certbot -d 'result.c01.ht2021.ru'
+```
