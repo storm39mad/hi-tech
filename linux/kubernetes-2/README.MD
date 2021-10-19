@@ -120,6 +120,15 @@ Password: Ihd5H4PwT4
 http://prometheus-kube-prometheus-prometheus.default.svc.cluster.local:9090
 ```
 
+## Nginx
+
+```bash
+apt install -y nginx
+vim /etc/nginx/site-enabled/default
+nginx -t
+systemctl reload nginx.service
+```
+
 ### Certbot
 
 https://certbot.eff.org/lets-encrypt/debianstretch-nginx
