@@ -1,0 +1,59 @@
+---
+- name: Disable Firewalld
+  service:
+    name: firewalld
+    state: stopped
+    enabled: no
+
+- name: Disable SELinux
+  selinux:
+    state: permissive
+    policy: targeted
+
+- name: Enable EPEL
+  dnf:
+    name: epel-release
+    state: present
+
+- name: Install common packages
+  dnf:
+    name:
+      - vim
+      - htop
+      - mc
+    state: present
+
+- name: Get docker repo
+  get_url:
+    url: https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+
+- name: Docker installation
+  dnf:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    state: present
+
+- name: Enable and start Docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Install python3 (and pip)
+  dnf:
+    name:
+      - python3
+      - python3-pip
+    state: present
+
+- name: Install docker-py
+  pip:
+    name: docker-py
+    state: present
+
+
+
+

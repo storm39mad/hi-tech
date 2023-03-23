@@ -1,0 +1,13 @@
+[Unit]
+Description=Worker app
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/dotnet /root/example-voting-app/worker/src/Worker/bin/Release/netcoreapp3.1/Worker.dll
+WorkingDirectory=/root/example-voting-app/worker
+Restart=on-failure
+RestartSec=42s
+
+[Install]
+WantedBy=multi-user.target

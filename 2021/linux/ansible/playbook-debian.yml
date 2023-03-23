@@ -1,0 +1,47 @@
+---
+- name: Install packages for Docker installation
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+    state: present
+
+- name: Add GPG key for Docker repo
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+
+- name: Add Docker repo
+  apt_repository:
+    repo: deb https://download.docker.com/linux/debian buster stable
+    state: present
+
+- name: Install Docker
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    state: present
+    update_cache: yes
+
+- name: Install python3 (and pip)
+  apt:
+    name:
+      - python3
+      - python3-pip
+    state: present
+
+- name: Change default python version
+  file:
+    src: /bin/python3
+    dest: /bin/python
+    state: link
+
+- name: Install docker-py
+  pip:
+    name: docker-py
+    state: present

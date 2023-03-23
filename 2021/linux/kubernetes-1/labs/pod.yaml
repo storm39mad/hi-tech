@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mynginx
+  labels:
+    name: mynginx
+spec:
+  containers:
+  - name: mynginx
+    image: nginx:latest
+    resources:
+      limits:
+        memory: "512Mi"
+        cpu: "1"
+    ports:
+      - containerPort: 80
+    volumeMounts:
+      - name:  testvol
+        mountPath:  /srv/dir
+      - name: nginxconf
+        mountPath: /etc/nginx/nginx.conf
+        subPath: nginx.conf
+  volumes:
+    - name: testvol
+      hostPath:
+        path: /opt/dir
+        type: Directory
+    - name: nginxconf
+      configMap:
+        name: nginx-conf
+        items:
+          - key: nginx.conf
+            path: nginx.conf

@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  name: ingress-ru
+  labels:
+    name: ingress-ru
+spec:
+  rules:
+  - host: "vote.c01.ht2021.ru"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: vote
+            port: 
+              number: 80
+  - host: "result.c01.ht2021.ru"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: result
+            port: 
+              number: 80
